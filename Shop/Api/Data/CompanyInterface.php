@@ -2,8 +2,6 @@
 
 namespace TimKi\Shop\Api\Data;
 
-use Magento\Tests\NamingConvention\true\string;
-
 /**
  * Interface CompanyInterface
  * @package AlexPoletaev\Api\Data

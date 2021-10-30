@@ -12,6 +12,7 @@ use TimKi\Shop\Model\CompanyFactory;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
+use Magento\Framework\DataObject;
 
 /**
  * Class CompanyRepository
@@ -54,11 +55,13 @@ class CompanyRepository implements CompanyRepositoryInterface
         CompanyResource $CompanyResource,
         CompanyFactory $CompanyFactory,
         CompanyCollectionFactory $CompanyCollectionFactory,
+        DataObject $dataObject,
         CompanySearchResultInterfaceFactory $CompanySearchResultFactory
     ) {
         $this->CompanyResource = $CompanyResource;
         $this->CompanyFactory = $CompanyFactory;
         $this->CompanyCollectionFactory = $CompanyCollectionFactory;
+        $this->dataObject = $dataObject;
         $this->CompanySearchResultFactory = $CompanySearchResultFactory;
     }
 
@@ -79,6 +82,41 @@ class CompanyRepository implements CompanyRepositoryInterface
         }
 
         return $this->registry[$id];
+    }
+
+    /**
+     * @return CompanySearchResultInterface
+     */
+    public function getAllCompanies()
+    {
+//        $companyCollection = $this->CompanyCollectionFactory->create();
+//        $companies = [];
+//        foreach ($companyCollection->getItems() as $company) {
+//            $companies[] = $company;
+//        }
+////        $Company = $this->CompanyFactory->create();
+////        $this->CompanyResource->load($Company, $id);
+////        if (!$Company->getId()) {
+////            throw new NoSuchEntityException(__('Requested Company does not exist'));
+////        }
+////        $this->registry[$id] = $Company;
+//
+//        return $this->dataObject->setData($companies);
+
+        /** @var CompanyCollection $collection */
+        $collection = $this->CompanyCollectionFactory->create();
+//        foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
+//            foreach ($filterGroup->getFilters() as $filter) {
+//                $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
+//                $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
+//            }
+//        }
+
+        /** @var CompanySearchResultInterface $searchResult */
+        $searchResult = $this->CompanySearchResultFactory->create();
+        $searchResult->setItems($collection->getItems());
+        $searchResult->setTotalCount($collection->getSize());
+        return $searchResult;
     }
 
     /**

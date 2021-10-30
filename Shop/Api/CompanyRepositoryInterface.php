@@ -2,8 +2,10 @@
 
 namespace TimKi\Shop\Api;
 
+use Magento\Framework\Exception\NoSuchEntityException;
 use TimKi\Shop\Api\Data\CompanyInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
+use TimKi\Shop\Api\Data\CompanySearchResultInterface;
 
 /**
  * Interface CompanyRepositoryInterface
@@ -23,6 +25,11 @@ interface CompanyRepositoryInterface
      * @return \TimKi\Shop\Api\Data\CompanySearchResultInterface
      */
     public function getList(SearchCriteriaInterface $searchCriteria);
+
+    /**
+     * @return \TimKi\Shop\Api\Data\CompanySearchResultInterface
+     */
+    public function getAllCompanies();
 
     /**
      * @param \TimKi\Shop\Api\Data\CompanyInterface $Company
