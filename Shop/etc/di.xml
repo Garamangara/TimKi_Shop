@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="TimKi\Shop\Api\Data\CompanyInterface"
+                type="TimKi\Shop\Model\Company"/>
+
+    <preference for="TimKi\Shop\Api\CompanyRepositoryInterface"
+                type="TimKi\Shop\Model\CompanyRepository"/>
+
+    <preference for="TimKi\Shop\Api\Data\CompanySearchResultInterface"
+                type="Magento\Framework\Api\SearchResults" />
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="deploy_sample_data"
+                      xsi:type="object">TimKi\Shop\Console\Command\DeploySampleDataCommand</item>
+                <item name="remove_sample_data"
+                      xsi:type="object">TimKi\Shop\Console\Command\RemoveSampleDataCommand</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
