@@ -85,58 +85,26 @@ class CompanyRepository implements CompanyRepositoryInterface
     }
 
     /**
-     * @return CompanySearchResultInterface
-     */
-    public function getAllCompanies()
-    {
-//        $companyCollection = $this->CompanyCollectionFactory->create();
-//        $companies = [];
-//        foreach ($companyCollection->getItems() as $company) {
-//            $companies[] = $company;
-//        }
-////        $Company = $this->CompanyFactory->create();
-////        $this->CompanyResource->load($Company, $id);
-////        if (!$Company->getId()) {
-////            throw new NoSuchEntityException(__('Requested Company does not exist'));
-////        }
-////        $this->registry[$id] = $Company;
-//
-//        return $this->dataObject->setData($companies);
-
-        /** @var CompanyCollection $collection */
-        $collection = $this->CompanyCollectionFactory->create();
-//        foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
-//            foreach ($filterGroup->getFilters() as $filter) {
-//                $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
-//                $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
-//            }
-//        }
-
-        /** @var CompanySearchResultInterface $searchResult */
-        $searchResult = $this->CompanySearchResultFactory->create();
-        $searchResult->setItems($collection->getItems());
-        $searchResult->setTotalCount($collection->getSize());
-        return $searchResult;
-    }
-
-    /**
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param SearchCriteriaInterface|null $searchCriteria
      * @return \TimKi\Shop\Api\Data\CompanySearchResultInterface
      */
-    public function getList(SearchCriteriaInterface $searchCriteria)
+    public function getList(SearchCriteriaInterface $searchCriteria = null)
     {
-        /** @var CompanyCollection $collection */
-        $collection = $this->CompanyCollectionFactory->create();
-        foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
-            foreach ($filterGroup->getFilters() as $filter) {
-                $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
-                $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
-            }
-        }
-
         /** @var CompanySearchResultInterface $searchResult */
         $searchResult = $this->CompanySearchResultFactory->create();
-        $searchResult->setSearchCriteria($searchCriteria);
+        /** @var CompanyCollection $collection */
+        $collection = $this->CompanyCollectionFactory->create();
+
+        if (!empty($searchCriteria)) {
+            foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
+                foreach ($filterGroup->getFilters() as $filter) {
+                    $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
+                    $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
+                }
+            }
+            $searchResult->setSearchCriteria($searchCriteria);
+        }
+
         $searchResult->setItems($collection->getItems());
         $searchResult->setTotalCount($collection->getSize());
         return $searchResult;

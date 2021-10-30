@@ -22,16 +22,9 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
-<!--    <route url="/V1/blog/companies" method="GET">-->
-<!--        <service class="TimKi\Shop\Api\CompanyRepositoryInterface"-->
-<!--                 method="getList"/>-->
-<!--        <resources>-->
-<!--            <resource ref="anonymous"/>-->
-<!--        </resources>-->
-<!--    </route>-->
     <route url="/V1/blog/companies" method="GET">
         <service class="TimKi\Shop\Api\CompanyRepositoryInterface"
-                 method="getAllCompanies"/>
+                 method="getList"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
