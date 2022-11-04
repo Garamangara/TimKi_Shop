@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+               xmlns:def="http://xxx/Magento-2-0-2-0-ce/soap/default?services=salesOrderRepositoryV1">
+    <soap:Header/>
+    <soap:Body>
+        <def:salesOrderRepositoryV1GetListRequest>
+            <searchCriteria>
+                <filterGroups>
+                    <!--Zero or more repetitions:-->
+                    <item>
+                        <!--Optional:-->
+                        <filters>
+                            <!--Zero or more repetitions:-->
+                            <item>
+                                <field>*</field>
+                                <value>*</value>
+                                <!--Optional:-->
+                                <conditionType>?</conditionType>
+                            </item>
+                        </filters>
+                    </item>
+                </filterGroups>
+                <!--Optional:-->
+                <sortOrders>
+                    <!--Zero or more repetitions:-->
+                    <item>
+                        <field>Name</field>
+                        <direction>%1</direction>
+                    </item>
+                </sortOrders>
+                <!--Optional:-->
+                <pageSize>10</pageSize><currentPage>0</currentPage>
+                <!--Optional:-->
+
+            </searchCriteria>
+        </def:salesOrderRepositoryV1GetListRequest>
+    </soap:Body>
+</soap:Envelope>
