@@ -21,7 +21,7 @@ interface CompanyRepositoryInterface
     public function get(int $id);
 
     /**
-     * @param SearchCriteriaInterface|null $searchCriteria
+     * @param \Magento\Framework\Api\SearchCriteriaInterface|null $searchCriteria
      * @return \TimKi\Shop\Api\Data\CompanySearchResultInterface
      */
     public function getList(SearchCriteriaInterface $searchCriteria = null);
